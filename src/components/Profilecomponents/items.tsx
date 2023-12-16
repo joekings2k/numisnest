@@ -1,5 +1,5 @@
 import { Box, Paper, Typography } from "@mui/material";
-import { item } from "src/utilities/types";
+import { ItemType, item } from "src/utilities/types";
 import { defaultItems } from "src/utilities/constants";
 import ItemsCard from "../cards/ItemsCard";
 import { useNavigate } from "react-router-dom";
@@ -55,14 +55,16 @@ const ItemsProfile = ({}) => {
           transform: "scale(0.95)",
         }}
       >
-        {defaultItems.slice(0, 12).map((item: item, index: number) => (
+        {defaultItems.slice(0, 12).map((item: ItemType, index: number) => (
           <ItemsCard
             key={index}
-            url={item.img}
-            
-            selling={item.itemName}
-            createdAt={item.dateCreated}
-            amount={item.amount}
+            flag={item.iso_code}
+            url={item.photo1}
+            firstName={item.seller_info[0].first_name}
+            lastName={item.seller_info[0].last_name}
+            selling={item.description}
+            createdAt={item.country}
+            amount={item.convertedPrice}
             bgColor="#F4F4F6"
           />
         ))}
