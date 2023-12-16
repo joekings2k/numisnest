@@ -7,7 +7,7 @@ interface Props {
   flag?: string;
   url?: string;
   firstName?: string;
-  lastName:string;
+  lastName?:string;
   selling?: string;
   createdAt?:string
   amount?:number;

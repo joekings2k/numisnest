@@ -3,7 +3,6 @@ import SellersHeader from "../headers/SellersHeader";
 import ItemsCard from "../cards/ItemsCard";
 import { ItemType, item } from "src/utilities/types";
 import LINKS from "src/utilities/links";
-import { defaultItems } from "src/utilities/constants";
 const Items = ({ isFetching, data }: { isFetching?: boolean; data: any }) => {
   return (
     <SellersHeader titleHead="Items" path={LINKS.Allitems}>

@@ -1,5 +1,5 @@
-import { Box, Typography } from '@mui/material'
-import React from 'react'
+import {  Typography } from '@mui/material'
+
 import AddItemsComp from 'src/components/AddItemsComponents/AddItemsComp';
 import VisitorLayout from 'src/components/layouts/VisitorLayout'
 

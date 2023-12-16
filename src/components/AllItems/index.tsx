@@ -1,10 +1,10 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import SelectComp from "src/components/Select/SelectComp";
 import Search from "src/components/homeComponents/Search";
-import { ItemType, item } from "src/utilities/types";
+import { ItemType} from "src/utilities/types";
 import Pagination from "../Pagination";
 import { useState } from "react";
-import { defaultItems } from "src/utilities/constants";
+
 import ItemsCard from "../cards/ItemsCard";
 
 interface Props {
@@ -15,6 +15,9 @@ interface Props {
 const ItemsComponets = ({data,isFetching}:Props) => {
   const theme = useTheme();
   const [pagenum, setPagenum] = useState<number>(1);
+  const handleChange  = ()=>{
+
+  }
   return (
     <Box sx={{ pb: "8rem" }}>
       <Box sx={{ mt: "4rem", display: "flex", justifyContent: "flex-end" }}>
@@ -22,6 +25,7 @@ const ItemsComponets = ({data,isFetching}:Props) => {
           selectLabel="Showing sellers from"
           menuItems={["Israel", "Nigera", "America"]}
           sx={{ border: "0.79px solid rgba(0, 71, 171, 0.40)" }}
+          handleChange={handleChange}
         />
       </Box>
       <Box sx={{ mt: "1rem" }}>
@@ -48,16 +52,19 @@ const ItemsComponets = ({data,isFetching}:Props) => {
               border: "0.79px solid rgba(0, 71, 171, 0.40)",
               width: "12rem",
             }}
+            handleChange={handleChange}
           />
           <SelectComp
             selectLabel=""
             menuItems={["Itlay", "Spain", "America"]}
             sx={{ border: "0.79px solid rgba(0, 71, 171, 0.40)" }}
+            handleChange={handleChange}
           />
           <SelectComp
             selectLabel="Under :"
             menuItems={["10$", "10-100$", "100-200$"]}
             sx={{ border: "0.79px solid rgba(0, 71, 171, 0.40)" }}
+            handleChange={handleChange}
           />
         </Box>
       </Box>
@@ -75,15 +82,16 @@ const ItemsComponets = ({data,isFetching}:Props) => {
           rowGap: "2rem",
           justifyItems: "center",
           position: "relative",
-          mt:"5rem"
+          mt: "5rem",
         }}
       >
-        {defaultItems.map((item: Partial <ItemType>, index: number) => (
+        {data.map((item:ItemType, index: number) => (
           <ItemsCard
             key={index}
             flag={item.iso_code}
             url={item.photo1}
-            name={item.name}
+            firstName={item.seller_info[0].first_name}
+            lastName={item.seller_info[0].last_name}
             selling={item.description}
             createdAt={item.country}
             amount={item.convertedPrice}

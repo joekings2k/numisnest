@@ -12,18 +12,18 @@ import { Seller, SellerType } from "src/utilities/types";
 
 const AllItems = ({}) => {
   const [allItems, setAllItems] = useState<any[]>(defaultItems);
-  const [isFetching, setIsFetching] = useState<boolean>(true);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
   useEffect(() => {
     const fetchAllsellers = async () => {
       try {
-        // setIsFetching(true);
+        setIsFetching(true);
         console.log("working...");
         const response = await axiosPublic.get(
           `duo/collector/get-items?page=1&limit=6&country=Nigeria&category`
         );
         const { items } = response.data.data;
         setAllItems(items);
-        // setIsFetching(false);
+        setIsFetching(false);
       } catch (error) {
         console.log(error);
       }

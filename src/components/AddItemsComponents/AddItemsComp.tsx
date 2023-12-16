@@ -10,7 +10,7 @@ import {
 import InputComponent from "../inputComponent.tsx/InputComponent";
 import SelectComp from "../Select/SelectComp";
 import TextFieldInputLimit from "../form-components/TextFieldInputLimit";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import useAxiosPrivate from "src/hooks/useAxiosPrivate";
 
 const AddItemsComp = () => {

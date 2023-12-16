@@ -1,12 +1,11 @@
 import { Box } from "@mui/material";
-import { FC } from "react";
+
 import SellersHeader from "../headers/SellersHeader";
 import SellerCard from "src/components/cards/SellerCard";
-import nora from "src/assets/Image/jenny.jpg";
-import jenny from "src/assets/Image/nora.jpg";
-import { Seller, SellerType } from "src/utilities/types";
+
+import {  SellerType } from "src/utilities/types";
 import LINKS from "src/utilities/links";
-import { defaultSellers } from "src/utilities/constants";
+
 const Sellers = ({ isFetching, data }: { isFetching?: boolean; data: any }) => {
   console.log(data)
   return (
