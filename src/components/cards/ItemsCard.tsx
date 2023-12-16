@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 interface Props {
   flag?: string;
   url?: string;
-  name?: string;
+  firstName?: string;
+  lastName:string;
   selling?: string;
   createdAt?:string
   amount?:number;
@@ -14,7 +15,7 @@ interface Props {
   isFetching?:boolean
 }
 
-const ItemsCard = ({ flag, url, name, selling,createdAt,amount,bgColor,isFetching }: Props) => {
+const ItemsCard = ({ flag, url, firstName,lastName, selling,createdAt,amount,bgColor,isFetching }: Props) => {
   const navigate = useNavigate()
   return (
     <div onClick={() => navigate( isFetching ? "":"/item/1")}>
@@ -50,7 +51,7 @@ const ItemsCard = ({ flag, url, name, selling,createdAt,amount,bgColor,isFetchin
               sx={{ mt: "0.7rem" }}
               fontFamily={"'Noto Sans KR', sans-serif"}
             >
-              {name}
+              {`${firstName} ${lastName}`}
             </Typography>
           )}
           {isFetching ? (

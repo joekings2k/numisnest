@@ -42,7 +42,9 @@ const HomePage = () => {
      };
      fetchAll();
    }, []);
-  
+   const handleChange = ()=>{
+
+   }
   return (
     <VisitorLayout>
       <Box
@@ -65,15 +67,17 @@ const HomePage = () => {
         <SelectComp
           selectLabel="Showing sellers and items  located in "
           menuItems={["Israel", "Nigera", "America"]}
+          handleChange={handleChange}
         />
         <SelectComp
           selectLabel="Prices are in  "
           menuItems={["USD", "NGN", "NIS"]}
+          handleChange={handleChange}
         />
       </Box>
-      <Sellers data={allSellers} isFetching={isFetching}/>
+      <Sellers data={allSellers} isFetching={isFetching} />
       <Box sx={{ mt: "9rem" }} />
-      <Items />
+      <Items data={allItems} isFetching={isFetching} />
     </VisitorLayout>
   );
 };

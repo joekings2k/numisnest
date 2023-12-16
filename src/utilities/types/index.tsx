@@ -38,6 +38,12 @@ export interface SellerType {
   iso_code: string;
 }
 
+interface SellerInfo {
+  _id: string;
+  first_name: string;
+  last_name: string;
+}
+
 export interface ItemType {
   _id: string;
   seller_id: string;
@@ -45,15 +51,17 @@ export interface ItemType {
   description: string;
   country: string;
   photo1: string;
-  photo2: string;
-  photo3: string;
-  video: string;
+  photo2?: string;
+  photo3?: string;
+  video?: string;
   currency: string;
   price: number;
   category: string;
   available: boolean;
   __v: number;
   iso_code: string;
+  createdAt: string;
+  seller_info: SellerInfo[];
   convertedPrice: number;
   convertedCurrency: string;
 }

@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
 import SellersHeader from "../headers/SellersHeader";
 import ItemsCard from "../cards/ItemsCard";
-import { item } from "src/utilities/types";
+import { ItemType, item } from "src/utilities/types";
 import LINKS from "src/utilities/links";
 import { defaultItems } from "src/utilities/constants";
-const Items = ({}) => {
+const Items = ({ isFetching, data }: { isFetching?: boolean; data: any }) => {
   return (
     <SellersHeader titleHead="Items" path={LINKS.Allitems}>
       <Box
@@ -24,18 +24,19 @@ const Items = ({}) => {
           pb: "4rem",
         }}
       >
-        {/* {defaultItems.slice(0, 12).map((item: item, index: number) => (
+        {data.slice(0, 12).map((item:ItemType, index: number) => (
           <ItemsCard
             key={index}
-            flag={item.flag}
-            url={item.img}
-            name={item.name}
-            selling={item.itemName}
-            createdAt={item.dateCreated}
-            amount={item.amount}
-            
+            flag={item.iso_code}
+            url={item.photo1}
+            firstName={item.seller_info[0].first_name}
+            lastName={item.seller_info[0].last_name}
+            selling={item.description}
+            createdAt={item.createdAt}
+            amount={item.price}
+            isFetching= {isFetching}
           />
-        ))} */}
+        ))}
       </Box>
     </SellersHeader>
   );
