@@ -1,3 +1,4 @@
+
 import {
   Box,
   Paper,
@@ -14,7 +15,7 @@ import { useState } from "react";
 import useAxiosPrivate from "src/hooks/useAxiosPrivate";
 
 const AddItemsComp = () => {
-  const axiosPrivate = useAxiosPrivate()
+  const axiosPrivate = useAxiosPrivate();
   const [photo1, setPhoto1] = useState<File | null>(null);
   const [photo2, setPhoto2] = useState<File | null>(null);
   const [photo3, setPhoto3] = useState<File | null>(null);
@@ -25,21 +26,22 @@ const AddItemsComp = () => {
   const [category, setCategory] = useState("");
   const [currency, setCurrency] = useState("");
   const [amount, setAmount] = useState<number>(0);
+
   const [collection, setCollection] = useState("");
   const valuesSubmit = [
     { head: "name", value: title },
     { head: "description", value: description },
     { head: "currency", value: currency },
     { head: "price", value: amount },
-    { head: "category", value: category},
-    { head: "photo1", value: photo1},
-    { head: "photo2", value: photo2},
-    { head: "photo3", value: photo3},
-    { head: "video1", value: video},
+    { head: "category", value: category },
+    { head: "photo1", value: photo1 },
+    { head: "photo2", value: photo2 },
+    { head: "photo3", value: photo3 },
+    { head: "video1", value: video },
   ];
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     const formData = new FormData();
-    valuesSubmit.forEach((val)=>{
+    valuesSubmit.forEach((val) => {
       if (typeof val.value === "string") {
         formData.append(val.head, val.value);
       } else if (typeof val.value === "number") {
@@ -47,16 +49,15 @@ const AddItemsComp = () => {
       } else if (val.value instanceof File) {
         formData.append(val.head, val.value);
       }
-    }
-    )
+    });
 
     formData.forEach((value, key) => {
       console.log(`${key}: ${value}`);
     });
-    const response =await axiosPrivate.post("/seller/add-item", formData, {
+    const response = await axiosPrivate.post("/seller/add-item", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
-    console.log(response)
+    console.log(response);
   };
   return (
     <Box sx={{ mb: "2rem" }}>
