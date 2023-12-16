@@ -11,6 +11,9 @@ import { useState } from "react";
 const SellersComponents = ({isFetching ,data}:{isFetching?:boolean,data:any}) => {
   const theme = useTheme();
   const [pagenum, setPagenum] = useState<number>(1);
+  const handleChange= ()=>{
+
+  }
   return (
     <Box sx={{ pb: "8rem" }}>
       <Box sx={{ mt: "4rem", display: "flex", justifyContent: "flex-end" }}>
@@ -18,6 +21,7 @@ const SellersComponents = ({isFetching ,data}:{isFetching?:boolean,data:any}) =>
           selectLabel="Showing sellers from"
           menuItems={["Israel", "Nigera", "America"]}
           sx={{ border: "0.79px solid rgba(0, 71, 171, 0.40)" }}
+          handleChange={handleChange}
         />
       </Box>
       <Box sx={{ mt: "1rem" }}>
