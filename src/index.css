@@ -1,0 +1,55 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html,
+body,
+#root,
+.app {
+  height: 100%;
+  width: 100%;
+  background-color: #F4F4F6;
+  z-index: -5;
+}
+
+.record-search{
+  background-color:  #E9E9E9;
+  padding: 0.875rem 1.5rem 0.6875rem 1.8125rem;
+  border-radius: 3rem;
+  transition: 0.5s;
+  border: 0.8px solid rgba(0, 71, 171, 0.40);
+  outline: none;
+  width: 20rem;
+  height: 3rem;
+}
+.record-search:focus {
+  border: 0.8px solid rgba(0, 71, 171, 0.80);
+  width: 22rem;
+}
+.record-search::placeholder{
+  font-size: 1.1rem;
+  font-family:"Poppins";
+}
+.navbardesk{
+  background-color: white;
+  position: fixed;
+  top:0; 
+  width: 100%; 
+  z-index: 99;
+}
+
+
+
+
+.navflow{
+  display: flex;
+  margin-left: 0.75rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+.navItem{
+  text-decoration:none;
+  list-style: none;
+  font-family:"poppins" ;
+}
