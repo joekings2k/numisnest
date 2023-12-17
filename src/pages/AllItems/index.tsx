@@ -19,7 +19,7 @@ const AllItems = ({}) => {
         setIsFetching(true);
         console.log("working...");
         const response = await axiosPublic.get(
-          `duo/collector/get-items?page=1&limit=6&country=Nigeria&category`
+          `duo/collector/get-items?page=1&limit=6&country=Nigeria`
         );
         const { items } = response.data.data;
         setAllItems(items);

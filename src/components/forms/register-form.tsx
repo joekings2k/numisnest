@@ -14,7 +14,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { FC } from "react";
+import { FC, useState } from "react";
 import TextInput from "../form-components/textInput";
 import { CheckBox } from "@mui/icons-material";
 import { Link } from "react-router-dom";
@@ -23,6 +23,7 @@ import { FormValueRegister } from "src/utilities/types";
 import { Formik, FormikHelpers } from "formik";
 import * as yup from "yup";
 import { axiosPublic } from "src/axios/axios";
+import { toast } from "react-toastify";
 
 export enum RegisterType {
   Collector = "collector",
@@ -83,19 +84,70 @@ const registerSchemaSeller = yup.object().shape({
 const RegisterForm = ({ type }: Props) => {
   const theme = useTheme();
   const blue = theme.palette.primary.light;
+   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const sellerRegister = async (values:FormValueRegister)=>{
     try {
+      setIsSubmitting(true);
       const response = await axiosPublic.post("seller/signup", values);
-    } catch (error) {
-      console.log(error)
+      toast("Registration successful", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        isLoading: false,
+        type: "success",
+        theme: "light",
+        style: {},
+      });
+      setIsSubmitting(false);
+    } catch (error:any) {
+      toast(`${error.response.data.message.split(":")[1]}`, {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        isLoading: false,
+        type: "error",
+        theme: "light",
+        style: {},
+      });
+    }finally{
+      setIsSubmitting(false);
     }
     
   }
   const collectorRegister = async (values:FormValueRegister)=>{
     try {
+      setIsSubmitting(true);
       const response = await axiosPublic.post("duo/collector/signup", values);
-    } catch (error) {
-      console.log(error)
+      setIsSubmitting(false);
+      toast("Registration successful", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        isLoading: false,
+        type: "success",
+        theme: "light",
+        style: {},
+      });
+    } catch (error:any) {
+     toast(`${error.response.data.message.split(":")[1]}`, {
+       position: "top-right",
+       autoClose: 1000,
+       hideProgressBar: false,
+       closeOnClick: true,
+       pauseOnHover: true,
+       isLoading: false,
+       type: "error",
+       theme: "light",
+       style: {},
+     });
+    }finally{
+      setIsSubmitting(false);
     }
     
   }

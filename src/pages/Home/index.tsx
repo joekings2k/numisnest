@@ -14,6 +14,7 @@ const HomePage = () => {
    const [allItems, setAllItems] = useState<any[]>(defaultItems);
    const [allSellers, setAllSellers] = useState<any[]>(defaultSellers);
    const [isFetching, setIsFetching] = useState<boolean>(true);
+    const [country, setCountry] = useState<string>("Nigeria");
    const {state}= useAppContext()
   const {token }= state
    console.log(token)
@@ -24,10 +25,10 @@ const HomePage = () => {
         
          const [sellersResponse, itemsResponse] = await Promise.all([
            axiosPublic.get(
-             `duo/collector/get-sellers?page=1&limit=10&country=Nigeria`
+             `duo/collector/get-sellers?page=1&limit=10&country=${country}`
            ),
            axiosPublic.get(
-             `duo/collector/get-items?page=1&limit=6&country=Nigeria&category`
+             `duo/collector/get-items?page=1&limit=6&country=${country}&category`
            ),
          ]); 
         
@@ -41,7 +42,7 @@ const HomePage = () => {
        }
      };
      fetchAll();
-   }, []);
+   }, [country]);
    const handleChange = ()=>{
 
    }
@@ -66,8 +67,8 @@ const HomePage = () => {
         ></Box>
         <SelectComp
           selectLabel="Showing sellers and items  located in "
-          menuItems={["Israel", "Nigera", "America"]}
-          handleChange={handleChange}
+          menuItems={["Israel", "Nigeria", "America"]}
+          handleChange={(value)=>setCountry(value)}
         />
         <SelectComp
           selectLabel="Prices are in  "

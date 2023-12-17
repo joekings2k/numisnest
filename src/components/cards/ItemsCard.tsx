@@ -1,6 +1,6 @@
 import { Box, Skeleton, Typography } from "@mui/material";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-import money from "src/assets/Image/money.png";
+import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -18,12 +18,12 @@ interface Props {
 const ItemsCard = ({ flag, url, firstName,lastName, selling,createdAt,amount,bgColor,isFetching }: Props) => {
   const navigate = useNavigate()
   return (
-    <div onClick={() => navigate( isFetching ? "":"/item/1")}>
+    <div onClick={() => navigate(isFetching ? "" : "/item/1")}>
       <Box
         sx={{
           backgroundColor: bgColor ? bgColor : "white",
           // width: { xs: "12.8rem", lg: "12rem", xl: "13.5rem" },
-          height: { xs: "16rem", lg: "15rem", xl: "16rem" },
+          height: { xs: "16rem", lg: "16rem", xl: "16rem" },
           display: "flex",
           flexDirection: "column",
           position: "relative",
@@ -62,7 +62,7 @@ const ItemsCard = ({ flag, url, firstName,lastName, selling,createdAt,amount,bgC
             ></Skeleton>
           ) : (
             <span
-              className={`fi fi-${flag}`}
+              className={`fi fi-${flag?.toLowerCase()}`}
               style={{ fontSize: "1.7rem" }}
             ></span>
           )}
@@ -80,8 +80,8 @@ const ItemsCard = ({ flag, url, firstName,lastName, selling,createdAt,amount,bgC
           ) : (
             <Box
               sx={{
-                width: "11rem",
-                height: "4rem",
+                width: "100%",
+                height: "5rem",
                 backgroundImage: `url(${url})`,
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
@@ -109,20 +109,19 @@ const ItemsCard = ({ flag, url, firstName,lastName, selling,createdAt,amount,bgC
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            mt: "1.5rem",
           }}
         >
           {isFetching ? (
             <Skeleton
               variant="rectangular"
               component={"h3"}
-              sx={{ mt: "0.5rem",width:"40%" }}
+              sx={{ mt: "0.5rem", width: "40%" }}
             ></Skeleton>
           ) : (
             <Typography
               sx={{ fontWeight: "400", fontSize: "0.75rem", color: "#0047AB" }}
             >
-              {createdAt}
+              {dayjs(createdAt).format("DD.MM.YYYY")}
             </Typography>
           )}
 
@@ -130,11 +129,11 @@ const ItemsCard = ({ flag, url, firstName,lastName, selling,createdAt,amount,bgC
             <Skeleton
               variant="rectangular"
               component={"h3"}
-              sx={{ mt: "0.5rem",width:"30%" }}
+              sx={{ mt: "0.5rem", width: "30%" }}
             ></Skeleton>
           ) : (
             <Typography sx={{ fontWeight: "600", fontSize: "1.5rem" }}>
-              {amount}
+              {amount?.toFixed()}
             </Typography>
           )}
         </Box>

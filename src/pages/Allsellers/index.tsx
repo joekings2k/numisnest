@@ -13,13 +13,15 @@ const AllSellers = ({}) => {
     defaultSellers
   );
   const [isFetching,setIsFetching]= useState<boolean>(false)
+  const [country,setCountry]=useState<string>("Nigeria")
+  console.log(country)
   useEffect(() => {
     const fetchAllsellers = async () => {
       try {
         setIsFetching(true)
         console.log("working...")
         const response = await axiosPublic.get(
-          `duo/collector/get-sellers?page=1&limit=10&country=Nigeria`
+          `duo/collector/get-sellers?page=1&limit=10&country=${country}`
         );
         const { sellers } = response.data.data;
         setAllSellers(sellers);
@@ -29,11 +31,11 @@ const AllSellers = ({}) => {
       }
     };
     fetchAllsellers();
-  }, []);
+  }, [country]);
   console.log(allSellers)
   return (
     <VisitorLayout>
-      <SellersComponents isFetching={isFetching} data={allSellers} />
+      <SellersComponents isFetching={isFetching} data={allSellers} changeCountry ={setCountry} />
       <Image
         src={group2}
         alt="group"

@@ -32,7 +32,7 @@ const Items = ({ isFetching, data }: { isFetching?: boolean; data: any }) => {
             lastName={item.seller_info[0].last_name}
             selling={item.description}
             createdAt={item.createdAt}
-            amount={item.price}
+            amount={item.convertedPrice}
             isFetching= {isFetching}
           />
         ))}

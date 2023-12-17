@@ -6,6 +6,7 @@ import {
   Paper,
   Typography,
   useTheme,
+  CircularProgress
 } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import TextInput from "../form-components/textInput";
@@ -15,16 +16,19 @@ import LINKS from "src/utilities/links";
 import { axiosPublic } from "src/axios/axios";
 import useAppContext from "src/hooks/useAppContext";
 import { ActionType } from "src/utilities/context/context";
+import { toast } from "react-toastify";
 
 const LoginForm = ({}) => {
   const theme = useTheme();
   const blue = theme.palette.primary.light;
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isSubmitting,setIsSubmitting]= useState<boolean>(false)
   const { dispatch } = useAppContext();
   const navigate = useNavigate();
   const handleLogin = async () => {
     try {
+      setIsSubmitting(true)
       const response = await axiosPublic.post("duo/general/signin", {
         email: email,
         password: password,
@@ -33,7 +37,36 @@ const LoginForm = ({}) => {
       console.log(userEmail);
       dispatch({ type: ActionType.setLogin, payload: { token: token } });
       navigate(LINKS.sellerProfile);
-    } catch (error) {}
+      setIsSubmitting(false)
+      toast("Login successful", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        isLoading: false,
+        type: "success",
+        theme: "light",
+        style: {
+          
+        },
+      });
+    } catch (error:any) {
+      
+      toast(`${error.response.data.message.split(":")[1]}`, {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        isLoading: false,
+        type: "error",
+        theme: "light",
+        style: {},
+      });
+    }finally{
+      setIsSubmitting(false)
+    }
   };
   return (
     <Paper
@@ -112,9 +145,21 @@ const LoginForm = ({}) => {
           borderRadius: "1rem",
           mt: "1.5rem",
         }}
+        disabled={isSubmitting}
         onClick={handleLogin}
       >
-        Sign in{" "}
+        {isSubmitting ? (
+          <CircularProgress
+            size={"2rem"}
+            sx={{
+              color: "white",
+              height: "1rem",
+              width: "1rem",
+            }}
+          />
+        ) : (
+          "sign in"
+        )}
       </Button>
       <Typography
         sx={{

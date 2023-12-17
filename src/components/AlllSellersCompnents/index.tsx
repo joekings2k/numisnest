@@ -8,20 +8,26 @@ import { Seller, SellerType } from "src/utilities/types";
 import SellerCard from "../cards/SellerCard";
 import Pagination from "../Pagination";
 import { useState } from "react";
-const SellersComponents = ({isFetching ,data}:{isFetching?:boolean,data:any}) => {
+const SellersComponents = ({
+  isFetching,
+  data,
+  changeCountry
+}: {
+  isFetching?: boolean;
+  data: any;
+  changeCountry:(value:any)=>void
+}) => {
   const theme = useTheme();
   const [pagenum, setPagenum] = useState<number>(1);
-  const handleChange= ()=>{
-
-  }
+  const handleChange = () => {};
   return (
     <Box sx={{ pb: "8rem" }}>
       <Box sx={{ mt: "4rem", display: "flex", justifyContent: "flex-end" }}>
         <SelectComp
           selectLabel="Showing sellers from"
-          menuItems={["Israel", "Nigera", "America"]}
+          menuItems={["Israel", "Nigeria", "America"]}
           sx={{ border: "0.79px solid rgba(0, 71, 171, 0.40)" }}
-          handleChange={handleChange}
+          handleChange={(value)=>changeCountry(value)}
         />
       </Box>
       <Box sx={{ mt: "1rem" }}>
@@ -83,6 +89,6 @@ const SellersComponents = ({isFetching ,data}:{isFetching?:boolean,data:any}) =>
       />
     </Box>
   );
-}
+};
 
 export default SellersComponents
