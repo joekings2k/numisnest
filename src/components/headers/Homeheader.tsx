@@ -109,7 +109,7 @@ const Homeheader = ({}) => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              px: "3rem",
+              px: {xs:"1rem",sm:"1.5rem",md:"2rem"} ,
               py: "2rem",
             }}
           >

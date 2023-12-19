@@ -2,8 +2,16 @@ import { Box, Grid, Typography, duration } from "@mui/material";
 import { motion } from "framer-motion";
 import { FC, useState } from "react";
 import money from "src/assets/Image/money.png";
+// interface ArrayItem {
+//   url?: string;
+//   // Add other properties if needed
+// }
+interface Props {
+ arry?:any[]
+}
 
-const Display: FC = () => {
+const Display = ({arry}:Props) => {
+  console.log(arry)
   const [active, setActive] = useState<number >(0); 
   const arr =[money,money,money,money]
   const positionArray = [
@@ -12,7 +20,7 @@ const Display: FC = () => {
     { x: 168, y: -283, scale: 2.7 },
     { x: -68, y: -283, scale: 2.7 },
   ];
-  const transformedArray = arr.map((item, index) => ({
+  const transformedArray = arry?.map((item, index) => ({
     item,
     position: positionArray[index], 
   }));
@@ -42,12 +50,12 @@ const Display: FC = () => {
           rowGap: "1.5rem",
         }}
       >
-        {transformedArray.map((item, index: number) => (
+        {transformedArray?.map((item, index: number) => (
           <Box
             key={index}
             component={motion.div}
             animate={index === active ? item.position : ""}
-            whileHover={index !== active ? { scale: 1.1 } :""}
+            whileHover={index !== active ? { scale: 1.1 } : ""}
             onClick={() => setActive(index)}
             transition={{ duration: 0.5 }}
             sx={{
@@ -58,7 +66,22 @@ const Display: FC = () => {
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
             }}
-          ></Box>
+          >
+            {item?.item?.endsWith(".mp4") && (
+              <video
+                width={"100%"}
+                height="100%"
+                autoPlay={(index === active)}
+                loop
+                muted={!(index === active)}
+                controls={index === active}
+               
+              >
+                <source src={item.item} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
+          </Box>
         ))}
       </Grid>
     </Box>

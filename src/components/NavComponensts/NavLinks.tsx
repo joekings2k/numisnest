@@ -10,7 +10,6 @@ interface Props {
 const NavLinks = ({ title, path,link }: Props) => {
   const { pathname } = useLocation();
   const path1 = pathname.slice(1).split("/")[0];
-  console.log(path1)
   const isPath = path === path1
   
   return (

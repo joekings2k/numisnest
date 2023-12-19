@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { Box, Button, Paper, Typography, useMediaQuery } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
 import _ from "lodash";
@@ -11,11 +13,11 @@ interface Props {
   countryCode?: string;
   mobile?: string;
   deliveryOptions?: string;
-  url?:string
-  country?:string
-  flag?:string
+  url?: string;
+  country?: string;
+  flag?: string;
 }
-const SellerDashboard = ({
+const CollectorDashboard = ({
   firstName,
   lastName,
   createdAt,
@@ -25,10 +27,11 @@ const SellerDashboard = ({
   deliveryOptions,
   url,
   country,
-  flag 
+  flag,
 }: Props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const isNotMobileScreens = useMediaQuery("(min-width:600px)");
+  console.log(flag)
   return (
     <Paper sx={{ position: "relative", mt: "5rem" }}>
       {isNotMobileScreens ? (
@@ -48,7 +51,6 @@ const SellerDashboard = ({
                 position: "absolute",
                 left: "55%",
                 top: 40,
-
                 zIndex: 5,
               }}
             ></span>
@@ -62,15 +64,6 @@ const SellerDashboard = ({
               }}
             >
               {`${_.upperFirst(firstName)} ${_.upperFirst(lastName)}`}
-            </Typography>
-            <Typography
-              sx={{
-                mt: "0.5rem",
-                fontSize: "2rem",
-                fontWeight: 600,
-              }}
-            >
-              World banknotes
             </Typography>
             <Typography
               sx={{
@@ -110,7 +103,7 @@ const SellerDashboard = ({
             </Typography>
             <Typography
               sx={{
-                mt: "2.5rem",
+                mt: "0.5rem",
                 fontSize: "2rem",
                 fontWeight: 600,
               }}
@@ -134,7 +127,7 @@ const SellerDashboard = ({
             </Typography>
             <Typography
               sx={{
-                mt: "2.5rem",
+                mt: "1.5rem",
                 fontSize: "2rem",
                 fontWeight: 600,
               }}
@@ -149,30 +142,6 @@ const SellerDashboard = ({
               >
                 {`${countryCode}${mobile}`}
               </span>
-            </Typography>
-            <Typography
-              sx={{
-                mt: "2.5rem",
-                fontSize: "2rem",
-                fontWeight: 600,
-              }}
-            >
-              Purchase and delivery options
-              <Typography
-                sx={{
-                  fontSize: "1.5rem",
-                  fontWeight: 400,
-                  width: {
-                    xs: "25rem",
-                    sm: "30rem",
-                    md: "40rem",
-                    lg: "50rem",
-                    xl: "65rem",
-                  },
-                }}
-              >
-                {deliveryOptions}
-              </Typography>
             </Typography>
           </Box>
           <Box
@@ -213,31 +182,6 @@ const SellerDashboard = ({
               }}
             >
               Messages
-            </Button>
-            <Button
-              sx={{
-                backgroundColor: "#0047AB",
-                color: "white",
-                padding: "0.5rem 2.5rem",
-                borderRadius: "0.4rem",
-                alignSelf: "center",
-                mt: "2rem",
-              }}
-            >
-              My Favorites ❤️
-            </Button>
-            <Button
-              sx={{
-                backgroundColor: "#0047AB",
-                color: "white",
-                padding: "0.5rem 3.9rem",
-                borderRadius: "0.4rem",
-                alignSelf: "center",
-                mt: "2rem",
-              }}
-              onClick={() => navigate(LINKS.AddItems)}
-            >
-              Add Item
             </Button>
           </Box>
         </Box>
@@ -423,4 +367,4 @@ const SellerDashboard = ({
   );
 };
 
-export default SellerDashboard;
+export default CollectorDashboard;

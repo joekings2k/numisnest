@@ -93,9 +93,10 @@ const ItemsComponets = ({data,isFetching}:Props) => {
             firstName={item.seller_info[0].first_name}
             lastName={item.seller_info[0].last_name}
             selling={item.description}
-            createdAt={item.country}
+            createdAt={item.createdAt}
             amount={item.convertedPrice}
             isFetching={isFetching}
+            currency={item.convertedCurrency}
           />
         ))}
       </Box>

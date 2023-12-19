@@ -47,6 +47,7 @@ const Collectionscard= ({}) => {
       >
         {filledImages.map((image, index) => (
           <Box
+          key={index}
             sx={{
               width: { xs: "5rem", lg: "8rem", xl: "9.5rem" },
               height: { xs: "5rem", lg: "8rem", xl: "9.5rem" },

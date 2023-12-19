@@ -34,6 +34,8 @@ const Items = ({ isFetching, data }: { isFetching?: boolean; data: any }) => {
             createdAt={item.createdAt}
             amount={item.convertedPrice}
             isFetching= {isFetching}
+            currency={item.convertedCurrency}
+            id={item._id}
           />
         ))}
       </Box>

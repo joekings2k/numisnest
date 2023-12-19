@@ -13,17 +13,25 @@ interface Props {
   amount?:number;
   bgColor?:string;
   isFetching?:boolean
+  currency?:string
+  height?:string
+  id?:string
 }
 
-const ItemsCard = ({ flag, url, firstName,lastName, selling,createdAt,amount,bgColor,isFetching }: Props) => {
+const ItemsCard = ({ flag, url, firstName,lastName, selling,createdAt,amount,bgColor,isFetching ,currency,height,id}: Props) => {
   const navigate = useNavigate()
   return (
-    <div onClick={() => navigate(isFetching ? "" : "/item/1")}>
+    <div onClick={() => navigate(isFetching ? "" : `/item/${id}`)}>
       <Box
         sx={{
           backgroundColor: bgColor ? bgColor : "white",
-          // width: { xs: "12.8rem", lg: "12rem", xl: "13.5rem" },
-          height: { xs: "16rem", lg: "16rem", xl: "16rem" },
+          width: { xs: "12.8rem", lg: "12rem", xl: "12.5rem" },
+          height: {
+            xs: height ? height : "15.5rem",
+            lg: height ? height : "15.5rem",
+            xl: height ? height : "15.5rem",
+          },
+          pb: "1rem",
           display: "flex",
           flexDirection: "column",
           position: "relative",
@@ -46,12 +54,8 @@ const ItemsCard = ({ flag, url, firstName,lastName, selling,createdAt,amount,bgC
           {isFetching ? (
             <Skeleton width={"40%"} component="h2"></Skeleton>
           ) : (
-            <Typography
-              variant="h5"
-              sx={{ mt: "0.7rem" }}
-              fontFamily={"'Noto Sans KR', sans-serif"}
-            >
-              {`${firstName} ${lastName}`}
+            <Typography variant="h5" sx={{ mt: "0.7rem", fontSize: "1.2rem" }}>
+              {firstName && `${firstName} ${lastName}`}
             </Typography>
           )}
           {isFetching ? (
@@ -61,10 +65,14 @@ const ItemsCard = ({ flag, url, firstName,lastName, selling,createdAt,amount,bgC
               variant="circular"
             ></Skeleton>
           ) : (
-            <span
-              className={`fi fi-${flag?.toLowerCase()}`}
-              style={{ fontSize: "1.7rem" }}
-            ></span>
+            <>
+              {flag && (
+                <span
+                  className={`fi fi-${flag?.toLowerCase()}`}
+                  style={{ fontSize: "1.2rem" }}
+                ></span>
+              )}
+            </>
           )}
         </Box>
         <Box sx={{}}>
@@ -99,8 +107,8 @@ const ItemsCard = ({ flag, url, firstName,lastName, selling,createdAt,amount,bgC
             sx={{ mt: "0.5rem" }}
           ></Skeleton>
         ) : (
-          <Typography variant="body1" sx={{ mt: "0.5rem" }}>
-            {selling}
+          <Typography variant="body1" sx={{ mt: "1rem" }}>
+            {selling?.slice(0, 20)}
           </Typography>
         )}
 
@@ -109,6 +117,7 @@ const ItemsCard = ({ flag, url, firstName,lastName, selling,createdAt,amount,bgC
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            mt: "1.5rem",
           }}
         >
           {isFetching ? (
@@ -132,8 +141,10 @@ const ItemsCard = ({ flag, url, firstName,lastName, selling,createdAt,amount,bgC
               sx={{ mt: "0.5rem", width: "30%" }}
             ></Skeleton>
           ) : (
-            <Typography sx={{ fontWeight: "600", fontSize: "1.5rem" }}>
-              {amount?.toFixed()}
+            <Typography
+              sx={{ fontWeight: "600", fontSize: "1.07rem", }}
+            >
+              {`${amount?.toFixed()} ${currency?.toUpperCase()}`}
             </Typography>
           )}
         </Box>

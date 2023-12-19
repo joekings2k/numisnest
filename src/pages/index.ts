@@ -11,6 +11,8 @@ import SelectRegister from "./auth/SelectRegister";
 import { Component } from "react";
 import SellerProfile from "./sellerProfile";
 import AddItemsPage from "./Additems";
+import CollectorProfile from "./collectorProfile";
+import EditProfilePage from "./EditProfile";
 
 export default{
   Auth:{
@@ -49,5 +51,11 @@ export default{
   },
   AddItems:{
     Component :AddItemsPage
+  },
+  CollectorProfile :{
+    Component:CollectorProfile
+  },
+  EditProfile:{
+    Component:EditProfilePage
   }
 }

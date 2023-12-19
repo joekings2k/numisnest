@@ -2,7 +2,12 @@ import { Box, Button, Typography } from "@mui/material";
 import { FC } from "react";
 import nora from "src/assets/Image/nora.jpg";
 import SellerCard from "../cards/SellerCard";
-import { Seller } from "src/utilities/types";
+import { Seller, singleSellerWOFeatured } from "src/utilities/types";
+import useAppContext from "src/hooks/useAppContext";
+import { useNavigate } from "react-router-dom";
+import LINKS from "src/utilities/links";
+import useCollectorsAxiosPrivate from "src/hooks/useCollectorsAxiosPrivate";
+import { toast } from "react-toastify";
 
 const seller: Seller = {
   flag: "ng",
@@ -10,15 +15,62 @@ const seller: Seller = {
   name: "James Doe",
   selling: "World Bank Notes",
 };
-
-const SellerAbout = ({}) => {
+interface Props{
+  data?:singleSellerWOFeatured
+}
+const SellerAbout = ({data }:Props) => {
+  const navigate = useNavigate()
+  const {state} = useAppContext()
+  const {token} = state
+  const axiosCollectorPrivate = useCollectorsAxiosPrivate()
+  const addFavorites = async ()=>{
+    try {
+       await axiosCollectorPrivate.post(
+        "duo/collector/add-fav",
+        { seller_id :data?._id}
+      );
+      toast("Added to favorites", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        isLoading: false,
+        type: "success",
+        theme: "light",
+        style: {},
+      });
+    } catch (error:any) {
+      toast(`${error.response.data.message.split(":")[1]}`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        isLoading: false,
+        type: "error",
+        theme: "light",
+        style: {},
+      });
+      navigate(LINKS.Login)
+    }
+  }
+  const addToFavorites = async()=>{
+    if(token ){
+      await addFavorites()
+    }else{
+       navigate(LINKS.Login);
+    }
+   
+  }
   return (
-    <Box sx={{ display: "flex", justifyContent: "space-between",mt:"5rem",alignItems:"center" }}>
+    <Box sx={{ display: "flex", mt:"5rem",alignItems:"center" }}>
       <SellerCard
-        flag={seller.flag}
-        url={seller.img}
-        name={seller.name}
-        selling={seller.selling}
+        flag={data?.iso_code}
+        url={data?.photo}
+        name={`${data?.first_name} ${data?.last_name}`}
+        selling={data?.about}
+        id={data?._id}
       />
       <Box sx={{ ml: "3rem" }}>
         <Typography
@@ -36,8 +88,7 @@ const SellerAbout = ({}) => {
             fontSize: { xs: "1rem", sm: "1.1rem", md: "1.5rem", lg: "2rem" },
           }}
         >
-          I have a large variety of banknotes from all around the world. I also
-          have some
+          {data?.about}
         </Typography>
         <Box component={"div"} sx={{ display: "flex" ,mt:"3rem"}}>
           <Button
@@ -73,6 +124,7 @@ const SellerAbout = ({}) => {
               borderRadius: "0.5rem",
               ml: "1.5rem",
             }}
+            onClick={addToFavorites}
           >
            Add to favorites ❤️
           </Button>

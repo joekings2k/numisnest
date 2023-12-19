@@ -1,12 +1,16 @@
 import { Box, Paper, Typography } from "@mui/material";
-import { ItemType, item } from "src/utilities/types";
+import { ItemType, SellerItemType, item } from "src/utilities/types";
 import { defaultItems } from "src/utilities/constants";
 import ItemsCard from "../cards/ItemsCard";
 import { useNavigate } from "react-router-dom";
 import { ArrowForwardIosOutlined } from "@mui/icons-material";
 
-const ItemsProfile = ({}) => {
+interface Props {
+  data?:any
+}
+const ItemsProfile = ({ data  }: Props) => {
   const navigate = useNavigate();
+  console.log(data);
   return (
     <Paper sx={{ mt: "6rem", pl: "2rem", pt: "2rem", pr: "1rem", mb: "3rem" }}>
       <Box
@@ -55,17 +59,17 @@ const ItemsProfile = ({}) => {
           transform: "scale(0.95)",
         }}
       >
-        {defaultItems.slice(0, 12).map((item: ItemType, index: number) => (
+        {data?.slice(0, 6)?.map((item: SellerItemType, index: number) => (
           <ItemsCard
             key={index}
-            flag={item.iso_code}
             url={item.photo1}
-            firstName={item.seller_info[0].first_name}
-            lastName={item.seller_info[0].last_name}
+            currency={item.currency}
             selling={item.description}
-            createdAt={item.country}
-            amount={item.convertedPrice}
+            createdAt={item.createdAt}
+            amount={item.price}
+          height="13.8rem"
             bgColor="#F4F4F6"
+            id={item._id}
           />
         ))}
       </Box>

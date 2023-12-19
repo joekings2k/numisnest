@@ -1,5 +1,5 @@
 import { Box, useTheme } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { axiosPublic } from "src/axios/axios";
 import SelectComp from "src/components/Select/SelectComp";
 import Items from "src/components/homeComponents/Items";
@@ -8,44 +8,45 @@ import Sellers from "src/components/homeComponents/Sellers";
 
 import VisitorLayout from "src/components/layouts/VisitorLayout";
 import useAppContext from "src/hooks/useAppContext";
+import useCountryName from "src/hooks/useCountryName";
 import { defaultItems, defaultSellers } from "src/utilities/constants";
+import { countries } from "src/utilities/constants/countries";
 
 const HomePage = () => {
-   const [allItems, setAllItems] = useState<any[]>(defaultItems);
-   const [allSellers, setAllSellers] = useState<any[]>(defaultSellers);
-   const [isFetching, setIsFetching] = useState<boolean>(true);
-    const [country, setCountry] = useState<string>("Nigeria");
-   const {state}= useAppContext()
-  const {token }= state
-   console.log(token)
-   useEffect(() => {
-     const fetchAll = async () => {
-       try {
-         setIsFetching(true);
-        
-         const [sellersResponse, itemsResponse] = await Promise.all([
-           axiosPublic.get(
-             `duo/collector/get-sellers?page=1&limit=10&country=${country}`
-           ),
-           axiosPublic.get(
-             `duo/collector/get-items?page=1&limit=6&country=${country}&category`
-           ),
-         ]); 
-        
-         const {sellers}= sellersResponse.data.data
-         const {items}= itemsResponse.data.data
-         setAllSellers(sellers)
-         setAllItems(items)
-         setIsFetching(false);
-       } catch (error) {
-         console.log(error);
-       }
-     };
-     fetchAll();
-   }, [country]);
-   const handleChange = ()=>{
+  const [allItems, setAllItems] = useState<any[]>(defaultItems);
+  const [allSellers, setAllSellers] = useState<any[]>(defaultSellers);
+  const [isFetching, setIsFetching] = useState<boolean>(true);
+  const [country, setCountry] = useState<string>("");
+  const countryNames = useCountryName();
+  const { state } = useAppContext();
+  const { token } = state;
+  useEffect(() => {
+    const fetchAll = async () => {
+      try {
+        setIsFetching(true);
 
-   }
+        const [sellersResponse, itemsResponse] = await Promise.all([
+          axiosPublic.get(
+            `duo/collector/get-sellers?page=1&limit=10&country=${country}`
+          ),
+          axiosPublic.get(
+            `duo/collector/get-items?page=1&limit=6&country=${country}&category`
+          ),
+        ]);
+
+        const { sellers } = sellersResponse.data.data;
+        const { items } = itemsResponse.data.data;
+        setAllSellers(sellers);
+        setAllItems(items);
+        setIsFetching(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAll();
+  }, [country]);
+  
+
   return (
     <VisitorLayout>
       <Box
@@ -67,14 +68,15 @@ const HomePage = () => {
         ></Box>
         <SelectComp
           selectLabel="Showing sellers and items  located in "
-          menuItems={["Israel", "Nigeria", "America"]}
-          handleChange={(value)=>setCountry(value)}
+          menuItems={["My location","Everywhere",...countryNames]}
+          handleChange={(value) => setCountry(value)}
+          defaultValue={"My location"}
         />
-        <SelectComp
+        {/* <SelectComp
           selectLabel="Prices are in  "
           menuItems={["USD", "NGN", "NIS"]}
           handleChange={handleChange}
-        />
+        /> */}
       </Box>
       <Sellers data={allSellers} isFetching={isFetching} />
       <Box sx={{ mt: "9rem" }} />

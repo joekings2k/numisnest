@@ -9,12 +9,13 @@ interface Props {
   name?: string;
   selling?: string;
   isFetching?:boolean;
+  id?:string
 }
 
-const SellerCard = ({ flag, url, name, selling, isFetching }: Props) => {
+const SellerCard = ({ flag, url, name, selling, isFetching,id }: Props) => {
   const naviagte = useNavigate();
   return (
-    <div onClick={() => naviagte(`seller/${1}`)}>
+    <div onClick={() => naviagte(isFetching ? "" : `/seller/${id}`)}>
       <Box
         sx={{
           backgroundColor: "white",
@@ -36,8 +37,8 @@ const SellerCard = ({ flag, url, name, selling, isFetching }: Props) => {
           <Skeleton
             variant="circular"
             sx={{
-              width:"2.5rem",
-              height :"2.5rem",
+              width: "2.5rem",
+              height: "2.5rem",
               position: "absolute",
               left: 15,
               top: 10,

@@ -24,7 +24,7 @@ const SelectComp = ({ selectLabel, menuItems, handleChange, ...rest }: Props) =>
       <Box>
         <Select
           sx={{ width:"8rem",height:"2.5rem",fontSize:"1.12rem",bgcolor:"white",borderRadius:"0.8rem",...rest.sx }}
-          defaultValue={menuItems[0]}
+          defaultValue={""}
           onChange={(event)=>handleChange(event.target.value)}
         >
           {menuItems.map((menuitem: string, index: number) => (

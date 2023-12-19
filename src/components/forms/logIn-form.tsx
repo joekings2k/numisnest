@@ -33,10 +33,14 @@ const LoginForm = ({}) => {
         email: email,
         password: password,
       });
-      const { token, email: userEmail } = response.data.data;
-      console.log(userEmail);
+      const { token, email: userEmail,role } = response.data.data;
+      console.log(role);
+      dispatch({type:ActionType.setUserType,payload:role})
       dispatch({ type: ActionType.setLogin, payload: { token: token } });
-      navigate(LINKS.sellerProfile);
+      role === "seller"
+        ? navigate(LINKS.sellerProfile)
+        : navigate(LINKS.collectorProfile);
+      
       setIsSubmitting(false)
       toast("Login successful", {
         position: "top-right",

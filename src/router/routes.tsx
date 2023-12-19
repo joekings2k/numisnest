@@ -39,10 +39,15 @@ const router = createBrowserRouter(
           path={pages.Allitems.path}
           element={<Pages.Allitems.Component />}
         />
-        <Route path= "seller">
-          <Route path = "profile"  element={<Pages.sellerProfile.Component />} />
-          <Route path = "additems"  element={<Pages.AddItems.Component />} />
+        <Route path="seller">
+          <Route path="profile" element={<Pages.sellerProfile.Component />} />
+          <Route path="additems" element={<Pages.AddItems.Component />} />
         </Route>
+
+        <Route path="collector">
+          <Route path="profile" element={<Pages.CollectorProfile.Component />} />
+        </Route>
+        <Route path ="edit-profile" element={<Pages.EditProfile.Component />} />
       </Route>
     </Route>
   )

@@ -7,7 +7,6 @@ import {  SellerType } from "src/utilities/types";
 import LINKS from "src/utilities/links";
 
 const Sellers = ({ isFetching, data }: { isFetching?: boolean; data: any }) => {
-  console.log(data)
   return (
     <SellersHeader titleHead="Sellers" path={LINKS.Allsellers}>
       <Box
@@ -35,6 +34,7 @@ const Sellers = ({ isFetching, data }: { isFetching?: boolean; data: any }) => {
               name={`${item.first_name} ${item.last_name}`}
               selling={item.delivery_option}
               isFetching={isFetching}
+              id={item._id}
             />
           ))}
       </Box>

@@ -1,14 +1,14 @@
 import { Box, Paper, Typography } from '@mui/material';
 import { defaultItems } from 'src/utilities/constants';
-import { ItemType, item } from 'src/utilities/types';
+import { ItemType, SellerProfileType, SingleSeller, SingleSellerFeaturedItem} from 'src/utilities/types';
 import ItemsCard from '../cards/ItemsCard';
 
 
 interface Props {
-  
+  data?:SingleSeller
 }
 
-const Featured  = ({}: Props) => {
+const Featured  = ({data}: Props) => {
   return (
     <Paper sx={{ mt: "6rem", pl: "2rem", pt: "2rem" }}>
       <Typography sx={{ fontSize: "2rem", fontWeight: 600 }}>
@@ -31,15 +31,15 @@ const Featured  = ({}: Props) => {
           pb: "1rem",
         }}
       >
-        {defaultItems.slice(0, 6).map((item: ItemType, index: number) => (
+        {data?.seller_featured_items.slice(0, 6).map((item: SingleSellerFeaturedItem, index: number) => (
           <ItemsCard
             key={index}
-            flag={item.iso_code}
+            flag={data.iso_code}
             url={item.photo1}
-            firstName={item.seller_info[0].first_name}
-            lastName={item.seller_info[0].last_name}
-            selling={item.description}
-            createdAt={item.country}
+            firstName={data.first_name}
+            lastName={data.last_name}
+            selling={item.name}
+            createdAt={item.createdAt}
             amount={item.convertedPrice}
             
             bgColor="#F4F4F6"

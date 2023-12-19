@@ -25,7 +25,7 @@ const SellerProfile = () => {
 
   return (
     <VisitorLayout>
-      <SellerDashboard firstName={profileData?.first_name} lastName={profileData?.last_name} createdAt={profileData?.createdAt} about={profileData?.about}  countryCode={profileData?.country_code} mobile={profileData?.mobile} deliveryOptions ={profileData?.delivery_option} url={profileData?.photo} country={profileData?.country} />
+      <SellerDashboard firstName={profileData?.first_name} lastName={profileData?.last_name} createdAt={profileData?.createdAt} about={profileData?.about}  countryCode={profileData?.country_code} mobile={profileData?.mobile} deliveryOptions ={profileData?.delivery_option} url={profileData?.photo} country={profileData?.country} flag={profileData?.iso_code} />
     </VisitorLayout>
   )
 }

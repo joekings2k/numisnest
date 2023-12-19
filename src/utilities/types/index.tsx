@@ -15,6 +15,7 @@ export interface item {
 export interface ContextDataType {
   token: string | null;
   user: any;
+  userType:string |null
 }
 
 export interface SellerType {
@@ -98,4 +99,100 @@ export interface SellerProfileType {
   suspended: boolean;
   verify: boolean;
   _id: string;
+}
+
+export interface SingleSeller {
+  _id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  country_code: string;
+  mobile: string;
+  role: string;
+  about: string;
+  delivery_option: string;
+  country: string;
+  auth_code: number;
+  available: boolean;
+  level: string;
+  verify: boolean;
+  approved: boolean;
+  suspended: boolean;
+  __v: number;
+  photo: string;
+  iso_code: string;
+  createdAt: Date;
+  seller_featured_items: SingleSellerFeaturedItem[];
+}
+
+export interface SingleSellerFeaturedItem {
+  _id: string;
+  name: string;
+  description: string;
+}
+
+
+export interface SellerItemType {
+  _id: string;
+  seller_id: string;
+  name: string;
+  description: string;
+  country: string;
+  iso_code: string;
+  photo1: string;
+  photo2: string;
+  photo3: string;
+  video: string;
+  currency: string;
+  price: number;
+  category: string;
+  available: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+export interface singleSellerWOFeatured{
+  _id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  country_code: string;
+  mobile: string;
+  role: string;
+  about: string;
+  delivery_option: string;
+  country: string;
+  auth_code: number;
+  available: boolean;
+  level: string;
+  verify: boolean;
+  approved: boolean;
+  suspended: boolean;
+  __v: number;
+  photo: string;
+  iso_code: string;
+  createdAt: string;
+}
+
+export interface SingleItemType {
+  _id: string;
+  seller_id: string;
+  name: string;
+  description: string;
+  country: string;
+  photo1: string;
+  photo2: string;
+  photo3: string;
+  video: string;
+  currency: string;
+  price: number;
+  category: string;
+  available: boolean;
+  iso_code: string;
+  createdAt: string;
+  convertedPrice: number;
+  convertedCurrency: string;
+  seller_info: singleSellerWOFeatured[];
+  other_seller_items: Partial<ItemType>[];
 }

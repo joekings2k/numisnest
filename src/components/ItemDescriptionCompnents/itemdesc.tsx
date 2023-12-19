@@ -1,8 +1,13 @@
 import { Box, Paper, Typography } from "@mui/material";
-
-const ItemDesc = ({}) => {
+interface Props {
+  description?: string | null;
+  deliveryOptions?:string|null
+  countryCode?:string|null
+  mobile?:string|null
+}
+const ItemDesc = ({description,deliveryOptions,countryCode,mobile}:Props) => {
   return (
-    <Paper sx={{pl:"2rem",pt:"2rem",mt:"4rem"}}>
+    <Paper sx={{pl:"2rem",pt:"2rem",mt:"4rem",pb:"2rem"}}>
       <Box>
         <Typography
           component={"header"}
@@ -15,17 +20,9 @@ const ItemDesc = ({}) => {
           Details
         </Typography>
         <Typography component={"p"} sx={{ fontSize: "2rem" }}>
-          5 Pounds Elizabeth II 1953, Blue print; yellow underprint; black
-          serial numbers
+          {description}
         </Typography>
-        <Typography component={"p"} sx={{ fontSize: "2rem" }}>
-          5 Pounds Elizabeth II 1953, Blue print; yellow underprint; black
-          serial numbers
-        </Typography>
-        <Typography component={"p"} sx={{ fontSize: "2rem" }}>
-          5 Pounds Elizabeth II 1953, Blue print; yellow underprint; black
-          serial numbers
-        </Typography>
+      
       </Box>
       <Box sx={{ mt: "2rem" }}>
         <Typography
@@ -39,8 +36,7 @@ const ItemDesc = ({}) => {
           Purchase and delivery
         </Typography>
         <Typography component={"p"} sx={{ fontSize: "2rem" }}>
-          Pickup can be done from Kfar Saba, usually in the evenings, please
-          contact me before coming. Postage is with registered mail (+ 65)
+          {deliveryOptions}
         </Typography>
       </Box>
       <Box sx={{ mt: "2rem" }}>
@@ -57,7 +53,7 @@ const ItemDesc = ({}) => {
         <Typography component={"p"} sx={{ fontSize: "2rem" }}>
           Whatsapp:{" "}
           <Typography component={"span"} sx={{ fontSize: "2rem" }}>
-            050 634 9545
+            {`${countryCode}${mobile}`}
           </Typography>{" "}
         </Typography>
       </Box>

@@ -7,7 +7,9 @@ const LINKS = {
   Allsellers: "/sellers",
   Allitems: "/items",
   sellerProfile:"/seller/profile",
-  AddItems :"/seller/additems"
+  AddItems :"/seller/additems",
+  collectorProfile:"/collector/profile",
+  editProfile:"/edit-profile"
 };
 
 export default LINKS

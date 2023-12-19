@@ -8,6 +8,7 @@ import { Seller, SellerType } from "src/utilities/types";
 import SellerCard from "../cards/SellerCard";
 import Pagination from "../Pagination";
 import { useState } from "react";
+import useCountryName from "src/hooks/useCountryName";
 const SellersComponents = ({
   isFetching,
   data,
@@ -19,13 +20,14 @@ const SellersComponents = ({
 }) => {
   const theme = useTheme();
   const [pagenum, setPagenum] = useState<number>(1);
+  const countryNames = useCountryName();
   const handleChange = () => {};
   return (
     <Box sx={{ pb: "8rem" }}>
       <Box sx={{ mt: "4rem", display: "flex", justifyContent: "flex-end" }}>
         <SelectComp
           selectLabel="Showing sellers from"
-          menuItems={["Israel", "Nigeria", "America"]}
+          menuItems={countryNames}
           sx={{ border: "0.79px solid rgba(0, 71, 171, 0.40)" }}
           handleChange={(value)=>changeCountry(value)}
         />
@@ -47,7 +49,7 @@ const SellersComponents = ({
           },
           columnGap: { xs: "1rem", lg: "1.5rem", xl: "2rem" },
           rowGap: "2rem",
-          justifyItems: "center",
+          
           position: "relative",
           mt: "5rem",
         }}
@@ -60,6 +62,7 @@ const SellersComponents = ({
             name={`${item.first_name} ${item.last_name}`}
             selling={item.delivery_option}
             isFetching={isFetching}
+            id={item._id}
           />
         ))}
       </Box>

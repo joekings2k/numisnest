@@ -4,7 +4,7 @@ import { ContextDataType } from "../types";
 export enum ActionType {
   setLogin = "SetLogin",
   setLogout = "SetLogout",
-
+  setUserType= "SetUsertype",
   setUser = "SetUser",
 }
 interface Action {
@@ -19,6 +19,7 @@ interface Props {
 const initialState: ContextDataType = {
   token: null,
   user: null,
+  userType:null,
 };
 const reducer = (state: ContextDataType, action: Action) => {
   const { type } = action;
@@ -38,6 +39,11 @@ const reducer = (state: ContextDataType, action: Action) => {
       return {
         ...state,
         user: action.payload,
+      };
+    case ActionType.setUserType:
+      return {
+        ...state,
+        userType: action.payload,
       };
 
     default:
