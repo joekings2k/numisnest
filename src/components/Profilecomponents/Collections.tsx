@@ -55,7 +55,7 @@ const Collections = ({sellerCollectionData}:Props) => {
         }}
       >
         {sellerCollectionData?.map((collection) => (
-          <Collectionscard collectionName="Pre 1937 indian banknotes" />
+          <Collectionscard collectionName={collection.name} collectionItems={collection.coll_list} />
         ))}
       </Box>
     </Paper>

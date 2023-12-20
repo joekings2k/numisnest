@@ -2,23 +2,23 @@ import { Box, Grid, Paper, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import useAppContext from "src/hooks/useAppContext";
 import useCollectorsAxiosPrivate from "src/hooks/useCollectorsAxiosPrivate";
-import { defaultSellers } from "src/utilities/constants";
+import { defaultFaves, defaultSellers } from "src/utilities/constants";
 import SellerCard from "../cards/SellerCard";
-import { SellerType } from "src/utilities/types";
+import { CollectorFav, SellerType } from "src/utilities/types";
 
 const FavoritesComponent = () => {
   const { state } = useAppContext();
   const { token } = state;
   const [isFetching,setIsFetching]= useState<boolean>(true)
-  const [favoriteSeller,setFavoriteSeller]= useState<Partial<SellerType>[]>(defaultSellers)
+  const [favoriteSeller,setFavoriteSeller]= useState<CollectorFav[]|null>(defaultFaves)
   const axiosCollectorsPrivate = useCollectorsAxiosPrivate()
   useEffect(() => {
     const fetchUserFavorites = async() => {
       try {
         const response = await axiosCollectorsPrivate.get("duo/collector/get-fav");
         const {data} = response?.data
-        
-        setFavoriteSeller(data?.[0].seller);
+        console.log(data)
+        setFavoriteSeller(data);
       } catch (error) {
         
       }finally{
@@ -49,12 +49,12 @@ const FavoritesComponent = () => {
             transform: "scale(0.89)",
           }}
         >
-          {favoriteSeller.map((seller: Partial<SellerType>) => (
+          {favoriteSeller?.map((seller: CollectorFav) => (
             <SellerCard
-              flag={seller.iso_code}
-              name={`${seller.first_name} ${seller.last_name}`}
-              url={seller.photo}
-              selling={`${seller.country_code}${seller.mobile}`}
+              flag={seller.seller?.[0].iso_code}
+              name={`${seller.seller?.[0].first_name} ${seller.seller?.[0].last_name}`}
+              url={seller.seller?.[0].photo}
+              selling={`${seller.seller?.[0].country_code}${seller.seller?.[0].mobile}`}
               isFetching={isFetching}
             />
           ))}

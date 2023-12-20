@@ -1,17 +1,20 @@
 import { Box, Typography } from "@mui/material"
-import money from "src/assets/Image/money.png"
+
+import { SingleItemType } from "src/utilities/types"
 interface Props {
   collectionName:string
+  collectionItems:Partial<SingleItemType>[]
 }
-const Collectionscard= ({collectionName}:Props) => {
-  const arryimg  = [money,money,money,money]
+const Collectionscard= ({collectionName ,collectionItems}:Props) => {
+  const images  = collectionItems.map((collectionnn:Partial<SingleItemType>) =>collectionnn.photo1)
+
   const fillImages = (images:any[], count:number) => {
     const filledImages = Array.from({ length: count }, (_, index) =>
       index < images.length ? images[index] : null
     );
     return filledImages;
   };
-  const filledImages = fillImages(arryimg,4)
+  const filledImages = fillImages(images,4)
   return (
     <Box
       sx={{

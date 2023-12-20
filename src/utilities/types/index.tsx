@@ -209,3 +209,13 @@ export interface CollectionType {
   __v: number;
   coll_list: Partial<SingleItemType>[];
 }
+
+export interface CollectorFav {
+  _id: string;
+  collector_id: string;
+  seller_id: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  seller: Partial <SingleSeller>[];
+}

@@ -118,3 +118,96 @@ export const defaultSellerItems = [
     __v: 0,
   },
 ];
+
+
+export const defaultFaves = [
+  {
+    _id: "6581f3ddd2ed0b5787525d09",
+    collector_id: "657833145ba72bb8e8c725f4",
+    seller_id: "656f18a978fe2f2d53f0ece9",
+    createdAt: "2023-12-19T19:49:49.754Z",
+    updatedAt: "2023-12-19T19:49:49.754Z",
+    __v: 0,
+    seller: [
+      {
+        _id: "656f18a978fe2f2d53f0ece9",
+        first_name: "john",
+        last_name: "bango",
+        email: "adeoye.ayobami@tens.ng",
+        country_code: "+234",
+        mobile: "8085812768",
+        country: "Nigeria",
+        photo:
+          "https://res.cloudinary.com/dqgjkptj6/image/upload/v1701786170/NumismaticFiles/photos/profile/adeoye.ayobami%40tens.ng/j2n6wwxtubnqbimj6cvd.jpg",
+        iso_code: "NG",
+      },
+    ],
+  },
+  {
+    _id: "6581f3ddd2ed0b5787525d09",
+    collector_id: "657833145ba72bb8e8c725f4",
+    seller_id: "656f18a978fe2f2d53f0ece9",
+    createdAt: "2023-12-19T19:49:49.754Z",
+    updatedAt: "2023-12-19T19:49:49.754Z",
+    __v: 0,
+    seller: [
+      {
+        _id: "656f18a978fe2f2d53f0ece9",
+        first_name: "john",
+        last_name: "bango",
+        email: "adeoye.ayobami@tens.ng",
+        country_code: "+234",
+        mobile: "8085812768",
+        country: "Nigeria",
+        photo:
+          "https://res.cloudinary.com/dqgjkptj6/image/upload/v1701786170/NumismaticFiles/photos/profile/adeoye.ayobami%40tens.ng/j2n6wwxtubnqbimj6cvd.jpg",
+        iso_code: "NG",
+      },
+    ],
+  },
+  {
+    _id: "6581f3ddd2ed0b5787525d09",
+    collector_id: "657833145ba72bb8e8c725f4",
+    seller_id: "656f18a978fe2f2d53f0ece9",
+    createdAt: "2023-12-19T19:49:49.754Z",
+    updatedAt: "2023-12-19T19:49:49.754Z",
+    __v: 0,
+    seller: [
+      {
+        _id: "656f18a978fe2f2d53f0ece9",
+        first_name: "john",
+        last_name: "bango",
+        email: "adeoye.ayobami@tens.ng",
+        country_code: "+234",
+        mobile: "8085812768",
+        country: "Nigeria",
+        photo:
+          "https://res.cloudinary.com/dqgjkptj6/image/upload/v1701786170/NumismaticFiles/photos/profile/adeoye.ayobami%40tens.ng/j2n6wwxtubnqbimj6cvd.jpg",
+        iso_code: "NG",
+      },
+    ],
+  },
+  {
+    _id: "6581f3ddd2ed0b5787525d09",
+    collector_id: "657833145ba72bb8e8c725f4",
+    seller_id: "656f18a978fe2f2d53f0ece9",
+    createdAt: "2023-12-19T19:49:49.754Z",
+    updatedAt: "2023-12-19T19:49:49.754Z",
+    __v: 0,
+    seller: [
+      {
+        _id: "656f18a978fe2f2d53f0ece9",
+        first_name: "john",
+        last_name: "bango",
+        email: "adeoye.ayobami@tens.ng",
+        country_code: "+234",
+        mobile: "8085812768",
+        country: "Nigeria",
+        photo:
+          "https://res.cloudinary.com/dqgjkptj6/image/upload/v1701786170/NumismaticFiles/photos/profile/adeoye.ayobami%40tens.ng/j2n6wwxtubnqbimj6cvd.jpg",
+        iso_code: "NG",
+      },
+    ],
+  },
+  
+];

@@ -1,6 +1,7 @@
 import { Box, useTheme } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
 import { axiosPublic } from "src/axios/axios";
+import ModalWrapper from "src/components/Modal/ModalWrapper";
 import SelectComp from "src/components/Select/SelectComp";
 import Items from "src/components/homeComponents/Items";
 
@@ -81,6 +82,7 @@ const HomePage = () => {
       <Sellers data={allSellers} isFetching={isFetching} />
       <Box sx={{ mt: "9rem" }} />
       <Items data={allItems} isFetching={isFetching} />
+      
     </VisitorLayout>
   );
 };
