@@ -3,6 +3,7 @@ import nora from "src/assets/Image/jenny.jpg";
 import _ from "lodash";
 import dayjs from "dayjs";
 import { Suspense } from "react";
+import { Spinner } from "src/pages/Item";
 interface Props {
   firstName?: string;
   lastName?: string;
@@ -37,13 +38,14 @@ const SellerProfile = ({
     !countryCode ||
     !mobile ||
     !deliveryOptions ||
-    !url ||
     !country ||
     !flag
   ) {
+    console.log(firstName)
     // If any of the required props is not available, show the fallback
-    return <Loading />;
+    return <Spinner />;
   }
+  
   return (
     <Paper sx={{ position: "relative", mt: "5rem" }}>
       {isNotMobileScreens ? (

@@ -14,7 +14,7 @@ const Featured  = ({data}: Props) => {
       <Typography sx={{ fontSize: "2rem", fontWeight: 600 }}>
         Featured
       </Typography>
-      <Box
+      {data?.seller_featured_items?.[0] ?(<Box
         sx={{
           display: "grid",
           gridTemplateColumns: {
@@ -31,21 +31,25 @@ const Featured  = ({data}: Props) => {
           pb: "1rem",
         }}
       >
-        {data?.seller_featured_items.slice(0, 6).map((item: SingleSellerFeaturedItem, index: number) => (
-          <ItemsCard
-            key={index}
-            flag={data.iso_code}
-            url={item.photo1}
-            firstName={data.first_name}
-            lastName={data.last_name}
-            selling={item.name}
-            createdAt={item.createdAt}
-            amount={item.convertedPrice}
-            
-            bgColor="#F4F4F6"
-          />
-        ))}
-      </Box>
+        {data?.seller_featured_items
+          .slice(0, 6)
+          .map((item: SingleSellerFeaturedItem, index: number) => (
+            <ItemsCard
+              key={index}
+              flag={data.iso_code}
+              url={item.photo1}
+              firstName={data.first_name}
+              lastName={data.last_name}
+              selling={item.name}
+              amount={item.price}
+              currency={"usd"}
+              bgColor="#F4F4F6"
+            />
+          ))}
+      </Box>):<Box>
+        <Typography sx={{fontSize:"1.4rem",mt:"1rem"}}>Seller is yet to add Featured items</Typography>
+        </Box>}
+      
     </Paper>
   );
 };

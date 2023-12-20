@@ -1,7 +1,9 @@
 import { Box, Typography } from "@mui/material"
 import money from "src/assets/Image/money.png"
-
-const Collectionscard= ({}) => {
+interface Props {
+  collectionName:string
+}
+const Collectionscard= ({collectionName}:Props) => {
   const arryimg  = [money,money,money,money]
   const fillImages = (images:any[], count:number) => {
     const filledImages = Array.from({ length: count }, (_, index) =>
@@ -33,7 +35,7 @@ const Collectionscard= ({}) => {
       <Typography
         sx={{ fontSize: "1.5rem", px: "2rem", textAlign: "center" }}
       >
-        Pre 1937 indian banknotes{" "}
+        {collectionName}{" "}
       </Typography>
       <Box
         sx={{

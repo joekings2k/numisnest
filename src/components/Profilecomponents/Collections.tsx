@@ -2,13 +2,16 @@ import { Box, Paper, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 import { ArrowForwardIosOutlined } from '@mui/icons-material';
 import Collectionscard from '../cards/collectioncard';
+import { CollectionType } from 'src/utilities/types';
+interface Props{
+  sellerCollectionData?:CollectionType[];
+}
 
 
-
-const Collections = ({}) => {
+const Collections = ({sellerCollectionData}:Props) => {
   const navigate = useNavigate()
   return (
-    <Paper sx={{ mt: "6rem", pl: "2rem", pt: "2rem",pr:"1rem" }}>
+    <Paper sx={{ mt: "6rem", pl: "2rem", pt: "2rem", pr: "1rem" }}>
       <Box
         sx={{
           display: "flex",
@@ -36,10 +39,24 @@ const Collections = ({}) => {
           </Typography>
         </div>
       </Box>
-      <Box sx={{display:"flex",justifyContent:"space-between",pb:"1.5rem"}}>
-        <Collectionscard />
-        <Collectionscard />
-        <Collectionscard />
+      <Box
+        sx={{
+          display: "grid",
+
+          gridTemplateColumns: {
+            xs: " 1fr",
+            sm: "repeat(2, 1fr)",
+            md: "repeat(2, 1fr)",
+            lg: "repeat(3, 1fr)",
+            xl: "repeat(3, 1fr)",
+          },
+          justifyContent: "center",
+          rowGap: "1rem",
+        }}
+      >
+        {sellerCollectionData?.map((collection) => (
+          <Collectionscard collectionName="Pre 1937 indian banknotes" />
+        ))}
       </Box>
     </Paper>
   );

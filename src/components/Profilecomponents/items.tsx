@@ -10,7 +10,7 @@ interface Props {
 }
 const ItemsProfile = ({ data  }: Props) => {
   const navigate = useNavigate();
-  console.log(data);
+ console.log(data)
   return (
     <Paper sx={{ mt: "6rem", pl: "2rem", pt: "2rem", pr: "1rem", mb: "3rem" }}>
       <Box
@@ -59,7 +59,7 @@ const ItemsProfile = ({ data  }: Props) => {
           transform: "scale(0.95)",
         }}
       >
-        {data?.slice(0, 6)?.map((item: SellerItemType, index: number) => (
+        {data.items?.slice(0, 6)?.map((item: SellerItemType, index: number) => (
           <ItemsCard
             key={index}
             url={item.photo1}

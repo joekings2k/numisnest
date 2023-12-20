@@ -97,6 +97,7 @@ const ItemsComponets = ({data,isFetching}:Props) => {
             amount={item.convertedPrice}
             isFetching={isFetching}
             currency={item.convertedCurrency}
+            id={item._id}
           />
         ))}
       </Box>

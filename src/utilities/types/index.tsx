@@ -129,6 +129,8 @@ export interface SingleSellerFeaturedItem {
   _id: string;
   name: string;
   description: string;
+  photo1:string;
+  price:number
 }
 
 
@@ -195,4 +197,15 @@ export interface SingleItemType {
   convertedCurrency: string;
   seller_info: singleSellerWOFeatured[];
   other_seller_items: Partial<ItemType>[];
+}
+
+export interface CollectionType {
+  _id: string;
+  seller_id: string;
+  name: string;
+  items_id: string[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  coll_list: Partial<SingleItemType>[];
 }

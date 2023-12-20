@@ -21,7 +21,7 @@ const AllSellers = ({}) => {
         setIsFetching(true)
         console.log("working...")
         const response = await axiosPublic.get(
-          `duo/collector/get-sellers?page=1&limit=10&country=${country}`
+          `duo/collector/get-sellers?page=1&limit=6&country=${country}`
         );
         const { sellers } = response.data.data;
         setAllSellers(sellers);

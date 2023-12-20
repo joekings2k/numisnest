@@ -108,7 +108,7 @@ const ItemsCard = ({ flag, url, firstName,lastName, selling,createdAt,amount,bgC
           ></Skeleton>
         ) : (
           <Typography variant="body1" sx={{ mt: "1rem" }}>
-            {selling?.slice(0, 20)}
+            {selling?.slice(0, 19)}
           </Typography>
         )}
 
@@ -130,7 +130,7 @@ const ItemsCard = ({ flag, url, firstName,lastName, selling,createdAt,amount,bgC
             <Typography
               sx={{ fontWeight: "400", fontSize: "0.75rem", color: "#0047AB" }}
             >
-              {dayjs(createdAt).format("DD.MM.YYYY")}
+              {createdAt ? dayjs(createdAt).format("DD.MM.YYYY"):""}
             </Typography>
           )}
 

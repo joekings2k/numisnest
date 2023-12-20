@@ -1,4 +1,4 @@
-import { DataArray, UndoOutlined } from "@mui/icons-material";
+import { DataArray, RepeatOnSharp, UndoOutlined } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { axiosPublic } from "src/axios/axios";
@@ -10,12 +10,13 @@ import Items from "src/components/homeComponents/Items";
 import VisitorLayout from "src/components/layouts/VisitorLayout";
 import useScrollToTop from "src/hooks/useScrolllToTop";
 import { defaultItems, defaultSellerItems } from "src/utilities/constants";
-import { ItemType, SellerItemType, SingleSeller } from "src/utilities/types";
+import { CollectionType, ItemType, SellerItemType, SingleSeller } from "src/utilities/types";
 
 const SellerPage = ({}) => {
   const { id } = useParams();
   const [data, setData] = useState<SingleSeller | undefined>(undefined);
   const [sellerItem, setSellerItem] = useState<SellerItemType[]>(defaultSellerItems);
+  const [sellerCollection,setSellerCollection]= useState<CollectionType[]|undefined>(undefined)
   useScrollToTop()
   useEffect(() => {
     const fetchSellerPageData = async () => {
@@ -26,6 +27,7 @@ const SellerPage = ({}) => {
         ]);
         const { data:sellerProfile } = sellerProfileReponse.data;
         const { data: sellerItemData } = sellerItemsResponse.data;
+
         
         setData(sellerProfile);
         setSellerItem(sellerItemData);
@@ -34,9 +36,21 @@ const SellerPage = ({}) => {
         console.log(error);
       }
     };
-
+    const fetchSingleSellerCollections =async()=>{
+      try {
+        const response = await axiosPublic.get(
+          `duo/collector/seller-collections/${id}`
+        );
+        const {data}= response.data
+        setSellerCollection(data)
+      } catch (error) {
+        
+      }
+    }
     fetchSellerPageData();
+    fetchSingleSellerCollections()
   }, []);
+  console.log(sellerItem)
   return (
     <VisitorLayout>
       <SellerProfile
@@ -52,7 +66,7 @@ const SellerPage = ({}) => {
         flag={data?.iso_code}
       />
       <Featured data={data} />
-      <Collections />
+      <Collections sellerCollectionData={sellerCollection} />
       <ItemsProfile data={sellerItem} />
     </VisitorLayout>
   );
