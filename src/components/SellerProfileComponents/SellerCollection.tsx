@@ -51,8 +51,9 @@ const SellerCollection = ({data}:Props) => {
               rowGap: "1rem",
             }}
           >
-            {data?.map((collection) => (
+            {data?.map((collection,index) => (
               <Collectionscard
+                key={index}
                 collectionName={collection.name}
                 collectionItems={collection.coll_list}
               />

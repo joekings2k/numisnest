@@ -4,26 +4,36 @@ import { Close } from "@mui/icons-material";
 import ModalWrapper from "./ModalWrapper";
 import EditItems from "../forms/edit-Item-form";
 import useAxiosPrivate from "src/hooks/useAxiosPrivate";
-
+import { SingleItemType } from "src/utilities/types";
+import { Spinner } from "src/pages/Item";
 
 type Props = {
   closeModal?: () => void;
   contentWidth?: string;
-  itemId ?:string |null;
+  itemId?: string | null;
 };
 
-const EditItemsModal = ({ closeModal, contentWidth ,itemId }: Props) => {
+const EditItemsModal = ({ closeModal, contentWidth, itemId }: Props) => {
   const theme = useTheme();
-  const axiosPrivate = useAxiosPrivate()
-   useEffect(()=>{
-    const getItem= async()=>{
-      const response = await axiosPrivate.get(
-        `seller/seller-item/${itemId}`
-      );
-      console.log(response)
-    }
-    getItem()
-   },[])
+  const axiosPrivate = useAxiosPrivate();
+  const [isFetching ,setIsFetching]=useState<boolean>(true)
+  const [singleItem, setSingleItem] = useState<SingleItemType | undefined>(undefined);
+  useEffect(() => {
+    const getItem = async () => {
+      try {
+        const response = await axiosPrivate.get(`seller/seller-item/${itemId}`);
+        const { data } = response?.data;
+        setSingleItem(data?.[0]);
+      } catch (error) {
+        
+      }finally{
+        setIsFetching(false)
+      }
+      
+    };
+    getItem();
+  }, []);
+  console.log(singleItem);
 
   return (
     <ModalWrapper contentWidth={contentWidth}>
@@ -38,7 +48,13 @@ const EditItemsModal = ({ closeModal, contentWidth ,itemId }: Props) => {
         <Close />
       </IconButton>
       <Box sx={{}}>
-        <EditItems />
+        {isFetching ? (
+          <Box>
+            <Spinner />{" "}
+          </Box>
+        ) : (
+          <EditItems data={singleItem} id={itemId} />
+        )}
       </Box>
     </ModalWrapper>
   );

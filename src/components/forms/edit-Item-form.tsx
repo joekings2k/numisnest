@@ -1,27 +1,78 @@
-import React, { useState } from 'react'
-import ModalWrapper from '../Modal/ModalWrapper'
-import InputComponent from '../inputComponent.tsx/InputComponent';
-import useAxiosPrivate from 'src/hooks/useAxiosPrivate';
-import { Box, Button, InputAdornment, MenuItem, Select, TextField } from '@mui/material';
-import TextFieldInputLimit from '../form-components/TextFieldInputLimit';
-
-const EditItems = () => {
+import React, { useState } from "react";
+import ModalWrapper from "../Modal/ModalWrapper";
+import InputComponent from "../inputComponent.tsx/InputComponent";
+import useAxiosPrivate from "src/hooks/useAxiosPrivate";
+import {
+  Box,
+  Button,
+  InputAdornment,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
+import TextFieldInputLimit from "../form-components/TextFieldInputLimit";
+import { SingleItemType } from "src/utilities/types";
+interface Props {
+  data?: SingleItemType;
+  id?:string|undefined|null;
+}
+const EditItems = ({ data ,id }: Props) => {
   const axiosPrivate = useAxiosPrivate();
-  const [photo1, setPhoto1] = useState<File | null>(null);
-  const [photo2, setPhoto2] = useState<File | null>(null);
-  const [photo3, setPhoto3] = useState<File | null>(null);
-  const [video, setvideo] = useState<File | null>(null);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-
-  const [category, setCategory] = useState("");
-  const [currency, setCurrency] = useState("");
-  const [amount, setAmount] = useState<number>(0);
+  const [photo1, setPhoto1] = useState<File | null | string | undefined>(
+    data?.photo1
+  );
+  const [photo2, setPhoto2] = useState<File | null | string | undefined>(
+    data?.photo2
+  );
+  const [photo3, setPhoto3] = useState<File | null | string | undefined>(
+    data?.photo3
+  );
+  const [video, setvideo] = useState<File | null | string | undefined>(
+    data?.video
+  );
+  const [title, setTitle] = useState(data?.name);
+  const [description, setDescription] = useState(data?.description);
+  const [currency, setCurrency] = useState(data?.convertedCurrency);
+  const [amount, setAmount] = useState<number|undefined>(data?.price);
 
   const [collection, setCollection] = useState("");
+  const valuesSubmit = [
+    { head: "name", value: title },
+    { head: "description", value: description },
+    { head: "currency", value: currency },
+    { head: "price", value: amount },
+    { head: "photo1", value: photo1 },
+    { head: "photo2", value: photo2 },
+    { head: "photo3", value: photo3 },
+    { head: "video1", value: video },
+  ];
+  const handleSubmit =async ()=>{
+    const formData = new FormData();
+    valuesSubmit.forEach((val) => {
+      if (typeof val.value === "string") {
+        formData.append(val.head, val.value);
+      } else if (typeof val.value === "number") {
+        formData.append(val.head, val.value.toString());
+      } else if (val.value instanceof File) {
+        formData.append(val.head, val.value);
+      }
+    });
+    try {
+      const response = await axiosPrivate.put(
+        `seller/update-item/${id}`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <Box>
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between",mt:"2rem" }}>
         <InputComponent
           pnum={1}
           acceptType="img"
@@ -105,7 +156,6 @@ const EditItems = () => {
                       }}
                     >
                       <MenuItem value="USD">$</MenuItem>
-                      <MenuItem value="NGN">₦</MenuItem>
                     </Select>
                   </InputAdornment>
                 ),
@@ -138,14 +188,14 @@ const EditItems = () => {
               borderRadius: "0.4rem",
               mt: "2rem",
             }}
-            
+            onClick={()=>handleSubmit()}
           >
-            Add
+            Upadate
           </Button>
         </Box>
       </Box>
     </Box>
   );
-}
+};
 
-export default EditItems
+export default EditItems;

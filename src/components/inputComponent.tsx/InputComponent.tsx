@@ -9,7 +9,7 @@ interface Props {
   acceptType?: string;
   pnum?: number;
   setFile:(value:File)=>void;
-  fileName?:File|null
+  fileName?:File|null|any
 }
 
 const InputComponent = ({ acceptType, pnum,setFile,fileName }: Props) => {
@@ -47,7 +47,7 @@ const InputComponent = ({ acceptType, pnum,setFile,fileName }: Props) => {
         </InputLabel>
       </IconButton>
       {fileName ? (<Typography>
-        {fileName.name}
+        {typeof fileName === "string" ? fileName.slice(20,40) : fileName.name}
       </Typography>):(<Typography>
         {acceptType === "video" ? "Video" : `Photo ${pnum}`}
       </Typography>)}
