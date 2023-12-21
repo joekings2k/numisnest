@@ -82,7 +82,7 @@ const HomePage = () => {
       <Sellers data={allSellers} isFetching={isFetching} />
       <Box sx={{ mt: "9rem" }} />
       <Items data={allItems} isFetching={isFetching} />
-      
+     
     </VisitorLayout>
   );
 };

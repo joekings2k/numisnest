@@ -10,11 +10,19 @@ interface Props {
 }
 
 const SellerCollection = ({data}:Props) => {
-  console.log(data);
+  
   return (
     <Box component={"div"}>
-      {data?.[0] ? ( 
-        <Paper sx={{ position: "relative", mt: "5rem" ,pl: "2rem", pb: "1rem" ,pt:"2rem" }}>
+      {data?.[0] ? (
+        <Paper
+          sx={{
+            position: "relative",
+            mt: "5rem",
+            pl: "2rem",
+            pb: "1rem",
+            pt: "2rem",
+          }}
+        >
           <Box>
             <Typography
               sx={{
@@ -22,9 +30,10 @@ const SellerCollection = ({data}:Props) => {
                 fontWeight: 700,
                 mr: "2rem",
                 mb: "0.5rem",
+                color: "#0047AB",
               }}
             >
-              Featured
+              Collection
             </Typography>
           </Box>
           <Box
