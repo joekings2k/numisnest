@@ -1,31 +1,44 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import SelectComp from "src/components/Select/SelectComp";
 import Search from "src/components/homeComponents/Search";
-import { ItemType} from "src/utilities/types";
+import { ItemType } from "src/utilities/types";
 import Pagination from "../Pagination";
 import { useState } from "react";
 
 import ItemsCard from "../cards/ItemsCard";
+import useCountryName from "src/hooks/useCountryName";
+import { Category } from "@mui/icons-material";
 
 interface Props {
-  data ? :any
-  isFetching ?:boolean
+  data?: any;
+  isFetching?: boolean;
+  setCountry: (value: string) => void;
+  setCategory: (value: string) => void;
+  countryValue: string;
+  categoryValue: string;
 }
 
-const ItemsComponets = ({data,isFetching}:Props) => {
+const ItemsComponets = ({
+  data,
+  isFetching,
+  setCountry,
+  setCategory,
+  countryValue,
+  categoryValue,
+}: Props) => {
   const theme = useTheme();
   const [pagenum, setPagenum] = useState<number>(1);
-  const handleChange  = ()=>{
-
-  }
+  const countryNames = useCountryName();
+  const handleChange = () => {};
   return (
     <Box sx={{ pb: "8rem" }}>
       <Box sx={{ mt: "4rem", display: "flex", justifyContent: "flex-end" }}>
         <SelectComp
           selectLabel="Showing sellers from"
-          menuItems={["Israel", "Nigera", "America"]}
+          menuItems={["Everywhere", ...countryNames]}
           sx={{ border: "0.79px solid rgba(0, 71, 171, 0.40)" }}
-          handleChange={handleChange}
+          handleChange={(value) => setCountry(value)}
+          value={countryValue}
         />
       </Box>
       <Box sx={{ mt: "1rem" }}>
@@ -37,29 +50,26 @@ const ItemsComponets = ({data,isFetching}:Props) => {
           <SelectComp
             selectLabel=""
             menuItems={[
-              "Banknotes",
-              "Coins",
-              "Medals",
-              "Stamps",
-              "Postcards",
-              "Envelopes",
-              "Vouchers",
-              "Tokens",
-              "Accessories",
-              "Others",
+              "banknote",
+              "coin",
+              "medal",
+              "stamp",
+              "postcard",
+              "envelope",
+              "voucher",
+              "token",
+              "accessories",
+              "others",
+            
             ]}
             sx={{
               border: "0.79px solid rgba(0, 71, 171, 0.40)",
               width: "12rem",
             }}
-            handleChange={handleChange}
+            handleChange={(value) => setCategory(value)}
+            value={categoryValue}
           />
-          <SelectComp
-            selectLabel=""
-            menuItems={["Itlay", "Spain", "America"]}
-            sx={{ border: "0.79px solid rgba(0, 71, 171, 0.40)" }}
-            handleChange={handleChange}
-          />
+
           <SelectComp
             selectLabel="Under :"
             menuItems={["10$", "10-100$", "100-200$"]}
@@ -85,7 +95,7 @@ const ItemsComponets = ({data,isFetching}:Props) => {
           mt: "5rem",
         }}
       >
-        {data.map((item:ItemType, index: number) => (
+        {data.map((item: ItemType, index: number) => (
           <ItemsCard
             key={index}
             flag={item.iso_code}

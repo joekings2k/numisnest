@@ -17,7 +17,7 @@ const HomePage = () => {
   const [allItems, setAllItems] = useState<any[]>(defaultItems);
   const [allSellers, setAllSellers] = useState<any[]>(defaultSellers);
   const [isFetching, setIsFetching] = useState<boolean>(true);
-  const [country, setCountry] = useState<string>("");
+  const [country, setCountry] = useState<string>("Everywhere");
   const countryNames = useCountryName();
   const { state } = useAppContext();
   const { token } = state;
@@ -31,7 +31,7 @@ const HomePage = () => {
             `duo/collector/get-sellers?page=1&limit=10&country=${country}`
           ),
           axiosPublic.get(
-            `duo/collector/get-items?page=1&limit=6&country=${country}&category`
+            `duo/collector/get-home-items?page=1&limit=2&country=${country}&category=banknote`
           ),
         ]);
 
@@ -69,9 +69,9 @@ const HomePage = () => {
         ></Box>
         <SelectComp
           selectLabel="Showing sellers and items  located in "
-          menuItems={["My location","Everywhere",...countryNames]}
+          menuItems={["Everywhere",...countryNames]}
           handleChange={(value) => setCountry(value)}
-          defaultValue={"My location"}
+          value={country}
         />
         {/* <SelectComp
           selectLabel="Prices are in  "

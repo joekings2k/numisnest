@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import EditItemsModal from "../Modal/edit-ItemsModal";
+import useAxiosPrivate from "src/hooks/useAxiosPrivate";
 type CardType = "Private" | "public";
 interface Props {
   flag?: string;
@@ -42,7 +43,7 @@ const ItemsCard = ({
   
 }: Props) => {
   const navigate = useNavigate();
-   
+  const axiosPrivate = useAxiosPrivate()
   return (
     <Box>
       
@@ -180,7 +181,6 @@ const ItemsCard = ({
           </Box>
           {cardtype === "Private" && (
             <Box>
-              {" "}
               <Button
                 sx={{
                   position: "absolute",
@@ -199,6 +199,26 @@ const ItemsCard = ({
                 }}
               >
                 Edit
+              </Button>
+              <Button
+                sx={{
+                  position: "absolute",
+                  top: -10,
+                  right: -10,
+                  display: "inline-flex",
+                  backgroundColor: "#0047AB",
+                  color: "#F9FAFA",
+                  paddingY: "0.1rem",
+                  fontSize: "0.7rem",
+                }}
+                onClick={async(e) => {
+                  e.stopPropagation();
+                  await axiosPrivate.delete(
+                    `seller/delete-item/${id}`
+                  );
+                }}
+              >
+                Delete
               </Button>
             </Box>
           )}

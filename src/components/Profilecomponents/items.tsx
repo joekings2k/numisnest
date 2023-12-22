@@ -10,7 +10,7 @@ interface Props {
 }
 const ItemsProfile = ({ data  }: Props) => {
   const navigate = useNavigate();
- console.log(data)
+ 
   return (
     <Paper sx={{ mt: "6rem", pl: "2rem", pt: "2rem", pr: "1rem", mb: "3rem" }}>
       <Box
@@ -67,7 +67,7 @@ const ItemsProfile = ({ data  }: Props) => {
             selling={item.description}
             createdAt={item.createdAt}
             amount={item.price}
-          height="13.8rem"
+            height="13.8rem"
             bgColor="#F4F4F6"
             id={item._id}
           />

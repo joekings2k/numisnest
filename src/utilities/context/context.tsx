@@ -6,6 +6,7 @@ export enum ActionType {
   setLogout = "SetLogout",
   setUserType= "SetUsertype",
   setUser = "SetUser",
+  setForgotPass = "SetForgotPass"
 }
 interface Action {
   type: ActionType;
@@ -20,6 +21,8 @@ const initialState: ContextDataType = {
   token: null,
   user: null,
   userType:null,
+  forgotEmail:null,
+  pin:null
 };
 const reducer = (state: ContextDataType, action: Action) => {
   const { type } = action;
@@ -44,6 +47,12 @@ const reducer = (state: ContextDataType, action: Action) => {
       return {
         ...state,
         userType: action.payload,
+      };
+    case ActionType.setForgotPass:
+      return {
+        ...state,
+        forgotEmail: action.payload.email,
+        pin:action.payload.pin
       };
 
     default:

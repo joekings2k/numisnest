@@ -15,7 +15,9 @@ export interface item {
 export interface ContextDataType {
   token: string | null;
   user: any;
-  userType:string |null
+  userType: string | null;
+  forgotEmail:string |null;
+  pin:string |null;
 }
 
 export interface SellerType {

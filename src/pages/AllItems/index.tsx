@@ -13,13 +13,14 @@ import { Seller, SellerType } from "src/utilities/types";
 const AllItems = ({}) => {
   const [allItems, setAllItems] = useState<any[]>(defaultItems);
   const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [country ,setCountry] =useState<string>("Nigeria")
+  const [category, setCategory] = useState<string>("banknote");
   useEffect(() => {
     const fetchAllsellers = async () => {
       try {
         setIsFetching(true);
-        console.log("working...");
         const response = await axiosPublic.get(
-          `duo/collector/get-items?page=1&limit=8&country=Nigeria`
+          `duo/collector/get-items?page=1&limit=2&country=${country}&category=${category}`
         );
         const { items } = response.data.data;
         setAllItems(items);
@@ -29,12 +30,12 @@ const AllItems = ({}) => {
       }
     };
     fetchAllsellers();
-  }, []);
+  }, [country,category]);
   
   
   return (
     <VisitorLayout>
-      <ItemsComponets  data={allItems} isFetching={isFetching}/>
+      <ItemsComponets  data={allItems} isFetching={isFetching} setCategory={setCategory} setCountry={setCountry} countryValue={country} categoryValue={category} />
       <Image
         src={group2}
         alt="group"

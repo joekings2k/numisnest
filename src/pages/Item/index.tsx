@@ -29,7 +29,7 @@ const ItemPage = ({}) => {
     }
     fetchSingleItem()
   },[id])
-  console.log(singleItem)
+
   return (
     <VisitorLayout>
       {isFetching ? (

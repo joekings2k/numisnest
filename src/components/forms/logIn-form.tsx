@@ -134,7 +134,7 @@ const LoginForm = ({}) => {
           control={<Checkbox sx={{ color: "#0047AB" }} />}
           label="Remember Me"
         />
-        <Typography sx={{ fontWeight: 600, color: blue }}>
+        <Typography sx={{ fontWeight: 600, color: blue }} component={"a"} href={LINKS.forgotpassword}>
           {" "}
           Forgot password?
         </Typography>

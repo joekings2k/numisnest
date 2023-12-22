@@ -13,6 +13,8 @@ import SellerProfile from "./sellerProfile";
 import AddItemsPage from "./Additems";
 import CollectorProfile from "./collectorProfile";
 import EditProfilePage from "./EditProfile";
+import VerifyUser from "./auth/VerifyUser";
+import ForgotPassword from "./auth/ForgotPassword";
 
 export default{
   Auth:{
@@ -27,6 +29,12 @@ export default{
     },
     Selectregister :{
       Component:SelectRegister
+    },
+    VerifyOtp:{
+      Component:VerifyUser
+    },
+    Forgotpassword:{
+      Component:ForgotPassword
     }
   },
   Home:{

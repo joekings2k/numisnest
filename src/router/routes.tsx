@@ -24,6 +24,14 @@ const router = createBrowserRouter(
           path={"registercollector"}
           element={<Pages.Auth.CollectorRegister.Component />}
         />
+        <Route
+          path={"verify-otp/:email"}
+          element={<Pages.Auth.VerifyOtp.Component />}
+        />
+        <Route
+          path={"forgot-password"}
+          element={<Pages.Auth.Forgotpassword.Component />}
+        />
       </Route>
 
       <Route path={"/"}>
